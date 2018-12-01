@@ -60,17 +60,30 @@ class StaticFrame(Frame):
         self.Wn = sparse.lil_matrix((self.shape[0] * self.shape[1], self.shape[0] * self.shape[1]))
         self.solution = np.zeros(shape=self.shape)
 
+        colored = abs(self.sketch[:, :, 1]-self.gray[:, :, 1]) + abs(self.sketch[:, :, 2]-self.gray[:, :, 2]) > 0
+        self.idx_marks = np.nonzero(colored)
+        self.idx_marks = self.idx(self.idx_marks)
+
+        white = (abs(self.sketch[:, :, 0]-np.ones(shape=(sketch.shape[:2]))) + abs(self.sketch[:, :, 1]) + abs(self.sketch[:, :, 2]))<1e-8
+        self.idx_white = np.nonzero(white)
+        self.idx_white = self.idx(self.idx_white)
+        self.idx_white = [i for i in self.idx_white if i in self.idx_marks]
+
+        self.idx_marks = [i for i in self.idx_marks if i not in self.idx_white]
+        print("color marks", self.idx_marks)
+        print("white marks", self.idx_white)
+
 
     def load_weight(self, Wn):
         self.Wn = Wn
 
-    def neighbors(self, p):
+    def neighbors(self, p, d=3):
         i, j = p[0], p[1]
         x, y = self.Y.shape[:2]
-        x1 = max(i - 1, 0)
-        x2 = min(i + 2, x)
-        y1 = max(j - 1, 0)
-        y2 = min(j + 2, y)
+        x1 = max(i - d, 0)
+        x2 = min(i + d+1, x)
+        y1 = max(j - d, 0)
+        y2 = min(j + d+1, y)
         N = []
         for a in range(x1, x2):
             for b in range(y1, y2):
@@ -97,14 +110,21 @@ class StaticFrame(Frame):
         start_time = time.time()
         ## set rows in colored indices
         Wn = self.Wn.tocsc()
-        for i in range(self.shape[0]):
-            for j in range(self.shape[1]):
-                if (self.sketch[i, j, 1] != self.gray[i, j, 1] or self.sketch[i, j, 2] != self.gray[i, j, 2]):
-                    Wn[self.idx([i, j])] = sparse.csr_matrix(([1.0], ([0], [self.idx([i, j])])), shape=(1, self.shape[0]*self.shape[1]))
+
+        for p in list(self.idx_marks):
+            Wn[p] = sparse.csr_matrix(([1.0], ([0], [p])), shape=(1, self.shape[0]*self.shape[1]))
+        for p in list(self.idx_white):
+            Wn[p] = sparse.csr_matrix(([1.0], ([0], [p])), shape=(1, self.shape[0]*self.shape[1]))
+
         print("Finish adding colored to Wn {}".format(time.time() - start_time))
 
-        b1 = (self.sketch[:, :, 1]).flatten()
-        b2 = (self.sketch[:, :, 2]).flatten()
+
+        b1 = np.zeros(shape=(self.shape[0]*self.shape[1]))
+        b2 = np.zeros(shape=(self.shape[0]*self.shape[1]))
+        b1[self.idx_marks] = (self.sketch[:, :, 1]).flatten()[self.idx_marks]
+        b2[self.idx_marks] = (self.sketch[:, :, 2]).flatten()[self.idx_marks]
+        b1[self.idx_white] = (self.gray[:, :, 1]).flatten()[self.idx_white]
+        b2[self.idx_white] = (self.gray[:, :, 2]).flatten()[self.idx_white]
 
         x1 = sparse.linalg.spsolve(Wn, b1)
         x2 = sparse.linalg.spsolve(Wn, b2)

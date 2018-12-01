@@ -8,7 +8,7 @@ import random
 import math
 import frame
 
-SEQUENTIAL = True
+SEQUENTIAL = False
 
 
 dir = "videos/butterfly/"
@@ -62,22 +62,6 @@ def transfer(last_dir, gray_dir, sketch_dir, small=5000, big=3000):
     imageio.imwrite(sketch_dir, im_output)
     return sumI, sumQ
 
-
-def preprocessing(i):
-
-    if(not os.path.exists("{}weight/{}.pickle".format(dir, str(i)))):
-        start_time = time.time()
-        origin_rgb = imageio.imread("{}gray/frame{}.png".format(dir, str(i)))
-        origin_yiq = rgb2yiq(origin_rgb)
-        s_origin_yiq = compress2(origin_yiq)
-
-        curFrame = frame.StaticFrame(origin_yiq.shape)
-        curFrame.load_gray(s_origin_yiq)
-        curFrame.build_weights_matrix()
-        with open("{}weight/{}.pickle".format(dir, str(i)), "wb") as f:
-            pickle.dump(curFrame.Wn, f)
-        print("Finish calculating weight matrix {} in time {}".format(str(i), time.time() - start_time))
-
 def run(i, sumI=None, sumQ=None):
     #if(not os.path.exists("{}seq_result/frame{}.png".format(dir, str(i)))):
     if(True):
@@ -92,8 +76,13 @@ def run(i, sumI=None, sumQ=None):
         s_sketch_yiq = compress2(sketch_yiq)
 
         curFrame = frame.StaticFrame(s_sketch_yiq, s_origin_yiq)
-        with open("{}weight/{}.pickle".format(dir, str(i)), "rb") as f:
-            curFrame.Wn = pickle.load(f)
+        if (not os.path.exists("{}weight/{}.pickle".format(dir, str(i)))):
+            curFrame.build_weights_matrix()
+            with open("{}weight/{}.pickle".format(dir, str(i)), "wb") as f:
+                pickle.dump(curFrame.Wn, f)
+        else:
+            with open("{}weight/{}.pickle".format(dir, str(i)), "rb") as f:
+                curFrame.Wn = pickle.load(f)
 
         print("Finish loading weights of {}".format(str(i)))
 
@@ -138,6 +127,5 @@ if __name__ == '__main__':
         pool.map(seq_run, range(18))
 
     else:
-        pool.map(preprocessing, range(180))
         pool.map(run, range(180))
 

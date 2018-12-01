@@ -62,4 +62,4 @@ if __name__ == "__main__":
     sketch_dir = 'images/sketch_{}.png'.format(imgname)
     gray_dir = 'images/gray_{}.png'.format(imgname)
 
-    generate(origin_dir, sketch_dir, gray_dir)
+    generate(origin_dir, sketch_dir, gray_dir, small=200, big=500)

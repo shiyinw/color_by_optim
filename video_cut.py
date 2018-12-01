@@ -1,5 +1,4 @@
-import cv2, os, imageio
-from moviepy.video.io.VideoFileClip import VideoFileClip
+import cv2, imageio
 import preprocessing
 
 def get_vedio_frames(video_dir, output_dir):
@@ -18,16 +17,10 @@ def get_vedio_frames(video_dir, output_dir):
 
 if __name__ == "__main__":
 
-  # if(not os.path.exists("videos/mickey/gray.mp4")):
-  #   with VideoFileClip("videos/mickey/origin.mp4") as video:
-  #     new = video.subclip(393, 398.5)
-  #     new.write_videofile("videos/mickey/gray.mp4", audio_codec='aac')
-
-
-  #get_vedio_frames('videos/butterfly/butterfly.mp4', "videos/butterfly/origin/")
+  get_vedio_frames('videos/butterfly/butterfly.mp4', "videos/butterfly/origin/")
 
   for i in range(180):
-    print(i)
+    input_dir = input("input_dir : ")
     preprocessing.generate(input_dir="videos/butterfly/origin/frame{}.png".format(str(i)),
                            gray_dir="videos/butterfly/gray/frame{}.png".format(str(i)),
                            sketch_dir="videos/butterfly/sketch/frame{}.png".format(str(i)))
