@@ -1,13 +1,15 @@
 import imageio, os
 from util import *
-from skimage.color import yiq2rgb, rgb2yiq
 import pickle
 import time
 from multiprocessing import Pool
 import frame
 
 
-dir = "videos/butterfly/"
+try:
+    dir = sys.argv[1]
+except:
+    dir = "videos/eye/"
 
 def run(i, sumI=None, sumQ=None):
     start_time = time.time()
@@ -84,5 +86,12 @@ def seq_run(t):
         pre = curr
 
 if __name__ == '__main__':
+    if (not os.path.exists("{}dynamic_result".format(dir))):
+        os.mkdir("{}dynamic_result".format(dir))
+    if (not os.path.exists("{}weight".format(dir))):
+        os.mkdir("{}weight".format(dir))
+    if (not os.path.exists("{}frame".format(dir))):
+        os.mkdir("{}frame".format(dir))
+
     pool = Pool(18)                     # Create a multiprocessing Pool
     pool.map(seq_run, range(18))

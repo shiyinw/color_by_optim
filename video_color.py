@@ -11,7 +11,7 @@ import frame
 SEQUENTIAL = False
 
 
-dir = "videos/butterfly/"
+dir = "videos/eye/"
 
 
 def transfer(last_dir, gray_dir, sketch_dir, small=5000, big=3000):
@@ -37,8 +37,8 @@ def transfer(last_dir, gray_dir, sketch_dir, small=5000, big=3000):
         if(np.std(im_yiq[x1:x2, y1:y2, 1:2])<0.03):
             color1 = np.mean(im_yiq[x1:x2, y1:y2, 1])
             color2 = np.mean(im_yiq[x1:x2, y1:y2, 2])
-            im_yiq_mark[x1:x2, y1:y2, 1] = 2 * color1 * np.ones(shape=(x2-x1, y2-y1))
-            im_yiq_mark[x1:x2, y1:y2, 2] = 2 * color2 * np.ones(shape=(x2-x1, y2-y1))
+            im_yiq_mark[x1:x2, y1:y2, 1] = color1 * np.ones(shape=(x2-x1, y2-y1))
+            im_yiq_mark[x1:x2, y1:y2, 2] = color2 * np.ones(shape=(x2-x1, y2-y1))
     for i in range(big):
         d = int(math.sqrt(x * y) / 100)
         xi = random.randint(0, x-1)
@@ -50,8 +50,8 @@ def transfer(last_dir, gray_dir, sketch_dir, small=5000, big=3000):
         if (np.std(im_yiq[x1:x2, y1:y2, 1:2]) < 0.01):
             color1 = np.mean(im_yiq[x1:x2, y1:y2, 1])
             color2 = np.mean(im_yiq[x1:x2, y1:y2, 2])
-            im_yiq_mark[x1:x2, y1:y2, 1] = 2 * color1 * np.ones(shape=(x2 - x1, y2 - y1))
-            im_yiq_mark[x1:x2, y1:y2, 2] = 2 * color2 * np.ones(shape=(x2 - x1, y2 - y1))
+            im_yiq_mark[x1:x2, y1:y2, 1] = color1 * np.ones(shape=(x2 - x1, y2 - y1))
+            im_yiq_mark[x1:x2, y1:y2, 2] = color2 * np.ones(shape=(x2 - x1, y2 - y1))
 
     sumI = np.sum(im_yiq[:, :, 1])
     sumQ = np.sum(im_yiq[:, :, 2])
@@ -68,7 +68,7 @@ def run(i, sumI=None, sumQ=None):
         start_time = time.time()
         origin_rgb = imageio.imread("{}gray/frame{}.png".format(dir, str(i)))
         origin_yiq = rgb2yiq(origin_rgb)
-        sketch_rgb = imageio.imread("{}sketch/frame{}.png".format(dir, str(i)))
+        sketch_rgb = imageio.imread("{}result/frame{}.png".format(dir, str(i)))
         sketch_yiq = rgb2yiq(sketch_rgb)
         Y = np.array(origin_yiq[:, :, 0], dtype='float64')
 
@@ -103,10 +103,10 @@ def run(i, sumI=None, sumQ=None):
         if SEQUENTIAL:
             imageio.imsave("{}seq_result/frame{}.png".format(dir, str(i)), sol_rgb)
         else:
-            imageio.imsave("{}result/frame{}.png".format(dir, str(i)), sol_rgb)
+            imageio.imsave("{}result2/frame{}.png".format(dir, str(i)), sol_rgb)
         print("Finish all {} {}".format(str(i), time.time() - start_time))
     else:
-        print("Result of {}result/frame{}.png exists.".format(dir, str(i)))
+        print("Result of {}result2/frame{}.png exists.".format(dir, str(i)))
 
 
 def seq_run(t):
@@ -120,7 +120,7 @@ def seq_run(t):
 
 
 if __name__ == '__main__':
-    pool = Pool(30)                     # Create a multiprocessing Pool
+    pool = Pool(1)                     # Create a multiprocessing Pool
 
 
     if SEQUENTIAL:

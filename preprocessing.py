@@ -16,6 +16,7 @@ def generate(input_dir, sketch_dir, gray_dir, small=5000, big=3000):
 
     im_gray = im_yiq.copy()
     im_gray[:, :, 1:] = np.zeros(shape=(x, y, 2))
+
     im_yiq_mark = im_gray.copy()
 
     im_gray_output = yiq2rgb(im_gray)
@@ -33,8 +34,8 @@ def generate(input_dir, sketch_dir, gray_dir, small=5000, big=3000):
         if(np.std(im_yiq[x1:x2, y1:y2, 1:2])<0.03):
             color1 = np.mean(im_yiq[x1:x2, y1:y2, 1])
             color2 = np.mean(im_yiq[x1:x2, y1:y2, 2])
-            im_yiq_mark[x1:x2, y1:y2, 1] = 2 * color1 * np.ones(shape=(x2-x1, y2-y1))
-            im_yiq_mark[x1:x2, y1:y2, 2] = 2 * color2 * np.ones(shape=(x2-x1, y2-y1))
+            im_yiq_mark[x1:x2, y1:y2, 1] = color1 * np.ones(shape=(x2-x1, y2-y1))
+            im_yiq_mark[x1:x2, y1:y2, 2] = color2 * np.ones(shape=(x2-x1, y2-y1))
     for i in range(big):
         d = int(math.sqrt(x * y) / 100)
         xi = random.randint(0, x-1)
@@ -46,8 +47,8 @@ def generate(input_dir, sketch_dir, gray_dir, small=5000, big=3000):
         if (np.std(im_yiq[x1:x2, y1:y2, 1:2]) < 0.01):
             color1 = np.mean(im_yiq[x1:x2, y1:y2, 1])
             color2 = np.mean(im_yiq[x1:x2, y1:y2, 2])
-            im_yiq_mark[x1:x2, y1:y2, 1] = 2 * color1 * np.ones(shape=(x2 - x1, y2 - y1))
-            im_yiq_mark[x1:x2, y1:y2, 2] = 2 * color2 * np.ones(shape=(x2 - x1, y2 - y1))
+            im_yiq_mark[x1:x2, y1:y2, 1] = color1 * np.ones(shape=(x2 - x1, y2 - y1))
+            im_yiq_mark[x1:x2, y1:y2, 2] = color2 * np.ones(shape=(x2 - x1, y2 - y1))
     im_output = yiq2rgb(im_yiq_mark)
     cv2.imwrite(sketch_dir, im_output)
 

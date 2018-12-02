@@ -1,6 +1,6 @@
 imageio
 sklearn
-cv2
+opencv-python
 numpy
 scipy
 pickle

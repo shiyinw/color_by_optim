@@ -70,8 +70,6 @@ class StaticFrame(Frame):
         self.idx_white = [i for i in self.idx_white if i in self.idx_marks]
 
         self.idx_marks = [i for i in self.idx_marks if i not in self.idx_white]
-        print("color marks", self.idx_marks)
-        print("white marks", self.idx_white)
 
 
     def load_weight(self, Wn):
@@ -95,6 +93,7 @@ class StaticFrame(Frame):
         return p[0]*self.shape[1]+p[1]
 
     def build_weights_matrix(self):
+        print("Starting calculating weight matrix......")
         start_time = time.time()
         x, y = self.shape[:2]
         for i in range(x):
@@ -151,6 +150,16 @@ class DynamicFrame(Frame):
         self.Ix, self.Iy = np.gradient(self.Y)
         self.It = gray[:, :, 0] - self.previous.Y
         self.solution = np.zeros(shape=self.shape)
+
+        colored = abs(self.sketch[:, :, 1] - self.gray[:, :, 1]) + abs(self.sketch[:, :, 2] - self.gray[:, :, 2]) > 0
+        self.idx_marks = np.nonzero(colored)
+        self.idx_marks = self.idx(self.idx_marks)
+        white = (abs(self.sketch[:, :, 0] - np.ones(shape=(sketch.shape[:2]))) + abs(self.sketch[:, :, 1]) + abs(
+            self.sketch[:, :, 2])) < 1e-8
+        self.idx_white = np.nonzero(white)
+        self.idx_white = self.idx(self.idx_white)
+        self.idx_white = [i for i in self.idx_white if i in self.idx_marks]
+        self.idx_marks = [i for i in self.idx_marks if i not in self.idx_white]
 
     def idx(self, p):
         return p[0]*self.shape[1]+p[1]
@@ -237,9 +246,16 @@ class DynamicFrame(Frame):
 
         print(self.sketch.shape)
         print(self.previous.solution.shape)
+        b10 = np.zeros(shape=(self.shape[1]*self.shape[0]))
+        b20 = np.zeros(shape=(self.shape[1]*self.shape[0]))
 
-        b1 = np.concatenate((self.sketch[:, :, 1].flatten(), self.previous.solution[:, :, 1].flatten()), axis=None)
-        b2 = np.concatenate((self.sketch[:, :, 2].flatten(), self.previous.solution[:, :, 2].flatten()), axis=None)
+        b10[self.idx_marks] = (self.sketch[:, :, 1]).flatten()[self.idx_marks]
+        b20[self.idx_marks] = (self.sketch[:, :, 2]).flatten()[self.idx_marks]
+        b10[self.idx_white] = (self.gray[:, :, 1]).flatten()[self.idx_white]
+        b20[self.idx_white] = (self.gray[:, :, 2]).flatten()[self.idx_white]
+
+        b1 = np.concatenate((b10, self.previous.solution[:, :, 1].flatten()), axis=None)
+        b2 = np.concatenate((b20, self.previous.solution[:, :, 2].flatten()), axis=None)
         print(b1.shape)
 
         x1 = sparse.linalg.spsolve(Wn, b1)[:self.shape[1]*self.shape[0]]
