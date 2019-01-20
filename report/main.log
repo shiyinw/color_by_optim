@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.10.26)  2 DEC 2018 16:54
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.10.26)  20 JAN 2019 12:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1450,6 +1450,62 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) [2]
+File: gray_31.png Graphic file (type bmp)
+<gray_31.png>
+File: sketch_31.png Graphic file (type bmp)
+<sketch_31.png>
+File: result_31.png Graphic file (type bmp)
+<result_31.png>
+File: gray_32.png Graphic file (type bmp)
+<gray_32.png>
+File: sketch_32.png Graphic file (type bmp)
+<sketch_32.png>
+File: result_32.png Graphic file (type bmp)
+<result_32.png>
+File: gray_33.png Graphic file (type bmp)
+<gray_33.png>
+File: sketch_33.png Graphic file (type bmp)
+<sketch_33.png>
+File: result_33.png Graphic file (type bmp)
+<result_33.png>
+File: gray_34.png Graphic file (type bmp)
+<gray_34.png>
+File: sketch_34.png Graphic file (type bmp)
+<sketch_34.png>
+
+
+LaTeX Warning: File `result_34.png' not found on input line 194.
+
+! Unable to load picture or PDF file 'result_34.png'.
+<to be read again> 
+                   }
+l.194 }
+       %
+The requested image couldn't be read because
+it was not a recognized image format.
+
+
+! Package graphics Error: Division by 0.
+
+See the graphics package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.194 }
+       %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: result_34.png Graphic file (type bmp)
+<result_34.png>
+[3]
+File: gray_35.png Graphic file (type bmp)
+<gray_35.png>
+File: sketch_35.png Graphic file (type bmp)
+<sketch_35.png>
+File: result_35.png Graphic file (type bmp)
+<result_35.png>
 File: gray_0.png Graphic file (type bmp)
 <gray_0.png>
 File: sketch_0.png Graphic file (type bmp)
@@ -1462,43 +1518,42 @@ File: sketch_5.png Graphic file (type bmp)
 <sketch_5.png>
 File: result_5.png Graphic file (type bmp)
 <result_5.png>
+ [4]
 File: gray_21.png Graphic file (type bmp)
 <gray_21.png>
 File: sketch_21.png Graphic file (type bmp)
 <sketch_21.png>
 File: result_21.png Graphic file (type bmp)
 <result_21.png>
-
-[3]
 File: gray_13.png Graphic file (type bmp)
 <gray_13.png>
 File: sketch_13.png Graphic file (type bmp)
 <sketch_13.png>
 File: result_13.png Graphic file (type bmp)
 <result_13.png>
- [4]
+ [5]
 File: seq.pdf Graphic file (type pdf)
 <use seq.pdf>
+ [6]
 File: gray_9.jpeg Graphic file (type bmp)
 <gray_9.jpeg>
- [5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 274.
- [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 274.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 407.
+ [7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 407.
  (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 274.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 274.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 407.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 407.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 92E16868F4794E7EB3968D0F1FB5FA6C.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 274.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 407.
  ) 
 Here is how much of TeX's memory you used:
- 23750 strings out of 492970
- 479604 string characters out of 6133937
+ 23810 strings out of 492970
+ 480539 string characters out of 6133937
  589396 words of memory out of 5000000
- 27519 multiletter control sequences out of 15000+600000
+ 27564 multiletter control sequences out of 15000+600000
  534558 words of font info for 57 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  53i,13n,67p,10428b,1039s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (6 pages).
+Output written on main.pdf (7 pages).

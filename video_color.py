@@ -11,7 +11,7 @@ import frame
 SEQUENTIAL = False
 
 
-dir = "videos/eye/"
+dir = "videos/bird/"
 
 
 def transfer(last_dir, gray_dir, sketch_dir, small=5000, big=3000):
@@ -68,7 +68,7 @@ def run(i, sumI=None, sumQ=None):
         start_time = time.time()
         origin_rgb = imageio.imread("{}gray/frame{}.png".format(dir, str(i)))
         origin_yiq = rgb2yiq(origin_rgb)
-        sketch_rgb = imageio.imread("{}result/frame{}.png".format(dir, str(i)))
+        sketch_rgb = imageio.imread("{}sketch/frame{}.png".format(dir, str(i)))
         sketch_yiq = rgb2yiq(sketch_rgb)
         Y = np.array(origin_yiq[:, :, 0], dtype='float64')
 
@@ -103,10 +103,10 @@ def run(i, sumI=None, sumQ=None):
         if SEQUENTIAL:
             imageio.imsave("{}seq_result/frame{}.png".format(dir, str(i)), sol_rgb)
         else:
-            imageio.imsave("{}result2/frame{}.png".format(dir, str(i)), sol_rgb)
+            imageio.imsave("{}result/frame{}.png".format(dir, str(i)), sol_rgb)
         print("Finish all {} {}".format(str(i), time.time() - start_time))
     else:
-        print("Result of {}result2/frame{}.png exists.".format(dir, str(i)))
+        print("Result of {}result/frame{}.png exists.".format(dir, str(i)))
 
 
 def seq_run(t):
@@ -120,8 +120,11 @@ def seq_run(t):
 
 
 if __name__ == '__main__':
-    pool = Pool(1)                     # Create a multiprocessing Pool
-
+    pool = Pool(10)                     # Create a multiprocessing Pool
+    if (not os.path.exists("{}result".format(dir))):
+        os.mkdir("{}result".format(dir))
+    if (not os.path.exists("{}weight".format(dir))):
+        os.mkdir("{}weight".format(dir))
 
     if SEQUENTIAL:
         pool.map(seq_run, range(18))

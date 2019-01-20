@@ -44,7 +44,7 @@ def generate(input_dir, sketch_dir, gray_dir, small=5000, big=3000):
         x2 = min(xi + d, x)
         y1 = max(yi - d, 0)
         y2 = min(yi + d, y)
-        if (np.std(im_yiq[x1:x2, y1:y2, 1:2]) < 0.01):
+        if (np.std(im_yiq[x1:x2, y1:y2, 1:2]) < 0.1):
             color1 = np.mean(im_yiq[x1:x2, y1:y2, 1])
             color2 = np.mean(im_yiq[x1:x2, y1:y2, 2])
             im_yiq_mark[x1:x2, y1:y2, 1] = color1 * np.ones(shape=(x2 - x1, y2 - y1))
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     try:
         imgname = sys.argv[1]
     except:
-        imgname = "5"
+        imgname = "34"
 
     origin_dir = 'images/origin_{}.png'.format(imgname)
     sketch_dir = 'images/sketch_{}.png'.format(imgname)

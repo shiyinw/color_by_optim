@@ -19,7 +19,7 @@ if __name__ == "__main__":
         output_dir = sys.argv[3]
         weight_dir = sys.argv[4]
     except:
-        filename = "13"
+        filename = "34"
         gray_dir = "images/gray_{}.png".format(filename)
         sketch_dir = "images/sketch_{}.png".format(filename)
         output_dir = "images/result_{}.png".format(filename)
@@ -28,9 +28,10 @@ if __name__ == "__main__":
 
     origin_rgb = imageio.imread(gray_dir)
     sketch_rgb = imageio.imread(sketch_dir)
-
     print(origin_rgb.shape)
     print(sketch_rgb.shape)
+    sketch_rgb = sketch_rgb[:, :, :3]
+    origin_rgb = origin_rgb[:, :, :3]
     assert origin_rgb.shape==sketch_rgb.shape, "The origin picture and sketch should have the same sizes."+str(sketch_rgb.shape)+str(origin_rgb.shape)
 
     origin_yiq = rgb2yiq(origin_rgb)

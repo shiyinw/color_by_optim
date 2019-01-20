@@ -1,11 +1,11 @@
 \contentsline {section}{\numberline {1}算法简介}{2}{section.1}
 \contentsline {section}{\numberline {2}图像处理}{2}{section.2}
 \contentsline {subsection}{\numberline {2.1}图像着色结果}{3}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}图像换色结果}{4}{subsection.2.2}
-\contentsline {section}{\numberline {3}从静态图片扩展到视频}{4}{section.3}
-\contentsline {subsection}{\numberline {3.1}准静态图片的像素采样法}{4}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}位移捕捉和临点检测}{5}{subsection.3.2}
-\contentsline {section}{\numberline {4}算法的不足}{5}{section.4}
-\contentsline {paragraph}{算法假设}{5}{section*.2}
-\contentsline {paragraph}{工作量}{6}{section*.3}
-\contentsline {paragraph}{}{6}{section*.4}
+\contentsline {subsection}{\numberline {2.2}图像换色结果}{5}{subsection.2.2}
+\contentsline {section}{\numberline {3}从静态图片扩展到视频}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}准静态图片的像素采样法}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}位移捕捉和临点检测}{6}{subsection.3.2}
+\contentsline {section}{\numberline {4}算法的不足}{7}{section.4}
+\contentsline {paragraph}{算法假设}{7}{section*.2}
+\contentsline {paragraph}{工作量}{7}{section*.3}
+\contentsline {paragraph}{}{7}{section*.4}
