@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.10.26)  20 JAN 2019 12:41
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.10.26)  20 JAN 2019 13:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1472,33 +1472,9 @@ File: gray_34.png Graphic file (type bmp)
 <gray_34.png>
 File: sketch_34.png Graphic file (type bmp)
 <sketch_34.png>
-
-
-LaTeX Warning: File `result_34.png' not found on input line 194.
-
-! Unable to load picture or PDF file 'result_34.png'.
-<to be read again> 
-                   }
-l.194 }
-       %
-The requested image couldn't be read because
-it was not a recognized image format.
-
-
-! Package graphics Error: Division by 0.
-
-See the graphics package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.194 }
-       %
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
 File: result_34.png Graphic file (type bmp)
 <result_34.png>
+
 [3]
 File: gray_35.png Graphic file (type bmp)
 <gray_35.png>

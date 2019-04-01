@@ -8,7 +8,7 @@ import math
 
 
 
-def generate(input_dir, sketch_dir, gray_dir, small=5000, big=3000):
+def generate(input_dir, sketch_dir, gray_dir, small=1000, big=30000):
 
     im_rgb = cv2.imread(input_dir)
     im_yiq = rgb2yiq(im_rgb)
@@ -63,4 +63,4 @@ if __name__ == "__main__":
     sketch_dir = 'images/sketch_{}.png'.format(imgname)
     gray_dir = 'images/gray_{}.png'.format(imgname)
 
-    generate(origin_dir, sketch_dir, gray_dir, small=200, big=500)
+    generate(origin_dir, sketch_dir, gray_dir, small=1000, big=500)
